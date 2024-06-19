@@ -1,0 +1,12 @@
+### Add an Appointment:
+POST http://localhost:8080/api/v1/appointments
+Content-Type: application/json
+
+{
+  "date": "2024-06-14",
+  "startHour": "12:00",
+  "endingHour": "12:30",
+  "comments": "",
+  "barber": {"id":3},
+  "customer": {"id": 3}
+}

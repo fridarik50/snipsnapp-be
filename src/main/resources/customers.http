@@ -1,0 +1,87 @@
+### Add a Customer:
+POST http://localhost:8080/api/v1/customers
+Content-Type: application/json
+
+{
+  "name": "Zvika Kaldeta",
+  "phone": "050-1234567",
+  "email": "z@mail.com",
+  "password": "1q2w3e"
+}
+
+### Add a Barber:
+POST http://localhost:8080/api/v1/barbers
+Content-Type: application/json
+
+{
+  "name": "Itzchak Cohen",
+  "skills": "Men's Haircuts, Women's Haircuts, Children's Haircuts",
+  "experience": "18 years, I've been cutting hair since High School.",
+  "workingHours": "Sunday-Thursday: 09:00-15:00 & 17:00-21:00, Friday: 08:00-13:00",
+  "address": "HaGefen 7 street, Rishon Le Zion",
+  "phone": "050-2345678"
+}
+
+### Add a Barber:
+POST http://localhost:8080/api/v1/barbers
+Content-Type: application/json
+
+{
+  "name": "Sofia Harlem",
+  "skills": "Women's Haircuts, Hair Dying, Hair Cosmetics",
+  "experience": "20 years, worked under many well known hair stylists since military discharge.",
+  "workingHours": "Sunday-Thursday: 09:00-20:00, Friday: 08:00-13:00",
+  "address": "Florentin 164 street, Tel Aviv",
+  "phone": "050-2345679",
+  "email": "sofiaH@yahoo.com",
+  "password": "Sofia12345"
+}
+
+### Add a Barber:
+POST http://localhost:8080/api/v1/barbers
+Content-Type: application/json
+
+{
+  "name": "Idan Mizrachi",
+  "skills": "Children's Haircuts",
+  "experience": "8 years of exclusive with children's hair.",
+  "workingHours": "Sunday-Thursday: 15:00-20:00, Friday: 08:00-13:00",
+  "address": "Hamada 13 street, Rehovot",
+  "phone": "050-1234123"
+}
+
+### Add a Barber:
+POST http://localhost:8080/api/v1/barbers
+Content-Type: application/json
+
+{
+  "name": "Natan Chen",
+  "skills": "Men's Haircuts, Beard Trimming",
+  "experience": "8 years of exclusive with children's hair.",
+  "workingHours": "Sunday-Thursday: 15:00-20:00, Friday: 08:00-13:00",
+  "address": "Hamada 13 street, Rehovot",
+  "phone": "050-1234123"
+}
+
+### Get all Barbers:
+GET http://localhost:8080/api/v1/barbers
+
+### Get a Barber by ID:
+GET http://localhost:8080/api/v1/barbers/5
+
+### Update a Barber:
+PUT http://localhost:8080/api/v1/barbers/1
+Content-Type: application/json
+
+{
+  "name": "Zvika Kaldeta",
+  "skills" : "Men's Haircuts, Boy's Haircuts, Beard Trimming",
+  "experience": "14 years, been a barber since military service.",
+  "workingHours": "Sunday-Thursday: 16:00-21:00, Friday: 08:30-14:00",
+  "address": "Helmonit 22 street, Rishon Le Zion",
+  "phone": "050-1234567"
+}
+
+### Delete a Barber:
+DELETE http://localhost:8080/api/v1/barbers/3
+
