@@ -37,14 +37,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests( req -> req.requestMatchers(HttpMethod.GET,"/api/v1/customers/**").authenticated())
                 .authorizeHttpRequests( req -> req.requestMatchers(HttpMethod.PUT,"/api/v1/customers/**").authenticated())
                 .authorizeHttpRequests( req -> req.requestMatchers(HttpMethod.DELETE,"/api/v1/customers/**").authenticated())
+                .authorizeHttpRequests( req -> req.requestMatchers("/api/v1/appointments/**").authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProfiver())
+                .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
     @Bean
-    public AuthenticationProvider authenticationProfiver(){
+    public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());

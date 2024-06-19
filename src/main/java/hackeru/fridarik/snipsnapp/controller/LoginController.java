@@ -9,6 +9,10 @@ import hackeru.fridarik.snipsnapp.service.LoginServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +25,21 @@ public class LoginController {
 
     private final LoginServiceImpl loginService;
     private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
     @PostMapping
     public ResponseEntity<AuthDTO<?>> login(
             @RequestBody @Valid LoginDTO dto
     ){
         String token = null;
-
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        dto.getEmail(), dto.getPassword()
+                )
+        );
+        if(!authentication.isAuthenticated()){
+            throw new UsernameNotFoundException("invalid user request");
+        }
         BarberResponseDTO d1 = loginService.loginBarber(dto);
         if (d1 != null) {
             token = jwtService.createToken(d1.getEmail());

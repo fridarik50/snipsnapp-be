@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,12 +24,14 @@ public class BarberServiceImpl implements BarberService {
     //props:
     private final BarberRepository barberRepository;
     private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public BarberResponseDTO createBarber(BarberCreateDTO dto) {
         if(barberRepository.existsBarberByEmail(dto.getEmail())){
             throw new IllegalArgumentException("Email already exists");
         }
+        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
         return modelMapper.map(barberRepository.save(modelMapper.map(dto, Barber.class)), BarberResponseDTO.class);
     }
 

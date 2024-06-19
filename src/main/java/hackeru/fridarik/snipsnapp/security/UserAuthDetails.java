@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserAuthDetails<T>  implements UserDetails {
+public class UserAuthDetails  implements UserDetails {
     private final String email;
     private final String password;
     private final List<GrantedAuthority> authorityList;

@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,12 +25,14 @@ public class CustomerServiceImpl implements CustomerService {
     //props:
     private final CustomerRepository customerRepository;
     private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public CustomerResponseDTO createCustomer(CustomerCreateDTO dto) {
         if (customerRepository.existsByEmail(dto.getEmail())) {
             throw new IllegalArgumentException("Email already exists");
         }
+        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
         return modelMapper.map(customerRepository.save(modelMapper.map(dto, Customer.class)), CustomerResponseDTO.class);
     }
 
